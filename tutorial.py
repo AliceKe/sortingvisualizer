@@ -11,6 +11,9 @@ class DrawInformation:
     GREEN = 0, 255, 0
     RED = 255, 0, 0
     BACKGROUND_COLOR = WHITE
+    ORANGE = 255,140,0
+    GOLD = 255,215,0
+
 
     #SHADES OF GREYS
     GRADIENTS = [
@@ -47,7 +50,7 @@ def draw(draw_info, algo_name, ascending):
 
     title = draw_info.LARGE_FONT.render(
         f"{algo_name} - {'Ascending' if ascending else 'Descending'}", 
-        1, draw_info.BLACK
+        1, draw_info.ORANGE
     )
     draw_info.window.blit(title, (draw_info.width/2 - title.get_width()/2, 5))
 
@@ -109,7 +112,7 @@ def bubble_sort(draw_info, ascending = True):
 
             if (num1 > num2 and ascending) or (num1 < num2 and not ascending):
                 lst[j], lst[j+1] = lst[j+1], lst[j]
-                draw_list(draw_info, {j: draw_info.GREEN, j+1: draw_info.RED}, True), 
+                draw_list(draw_info, {j: draw_info.GOLD, j+1: draw_info.ORANGE}, True), 
                 yield True #yield makes it a generator function
 
     return lst
@@ -130,7 +133,7 @@ def insertion_sort(draw_info, ascending = True):
             lst[i] = lst[i-1]
             i = i-1
             lst[i] = current
-            draw_list(draw_info, {i-1: draw_info.GREEN, i: draw_info.RED}, True)
+            draw_list(draw_info, {i-1: draw_info.GOLD, i: draw_info.ORANGE}, True)
             yield True
 
     return lst
@@ -145,7 +148,7 @@ def selection_sort(draw_info, ascending = True):
                 if lst[curr_min] > lst[j]:
                     curr_min = j
             lst[i], lst[curr_min] = lst[curr_min], lst[i]
-            draw_list(draw_info, {i-1: draw_info.GREEN, i: draw_info.RED}, True)
+            draw_list(draw_info, {i-1: draw_info.GOLD, i: draw_info.ORANGE}, True)
             yield True
     else:
         for i in range(len(lst)-1, 0, -1):
@@ -154,7 +157,7 @@ def selection_sort(draw_info, ascending = True):
                 if lst[curr_min] > lst[j]:
                     curr_min = j
             lst[i], lst[curr_min] = lst[curr_min], lst[i]
-            draw_list(draw_info, {i-1: draw_info.GREEN, i: draw_info.RED}, True)
+            draw_list(draw_info, {i-1: draw_info.GOLD, i: draw_info.ORANGE}, True)
             yield True
     
     return lst

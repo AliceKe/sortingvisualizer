@@ -3,6 +3,7 @@ import pygame
 import random
 import math
 pygame.init()
+pygame.mixer.init(frequency=60)
 
 #keep all styling. instantiates a class instance
 class DrawInformation:
@@ -13,7 +14,11 @@ class DrawInformation:
     BACKGROUND_COLOR = WHITE
     ORANGE = 255,140,0
     GOLD = 255,215,0
-
+    LIGHTPINK = 255,182,193
+    HOTPINK = 255,105,180
+    RASPBERRY = 210, 31, 60
+    DESIRE = 234, 60, 83
+    CARMINE = 150, 0, 24
 
     #SHADES OF GREYS
     GRADIENTS = [
@@ -22,8 +27,14 @@ class DrawInformation:
         (192, 192, 192),
     ]
 
-    FONT = pygame.font.SysFont('comicsans', 20)
-    LARGE_FONT = pygame.font.SysFont('comicsans', 30)
+    REDS = [
+        (210, 31, 60),
+        (234, 60, 83),
+        (150, 0, 24)
+    ]
+
+    FONT = pygame.font.SysFont('Verdana', 20)
+    LARGE_FONT = pygame.font.SysFont('Verdana', 30)
 
     SIDE_PAD = 100
     TOP_PAD = 150
@@ -83,7 +94,7 @@ def draw_list(draw_info, color_positions = {}, clear_bg = False):
         x = draw_info.start_x + i * draw_info.block_width
         y = draw_info.height - (val - draw_info.min_val) * draw_info.block_height
 
-        color = draw_info.GRADIENTS[i % 3]
+        color = draw_info.REDS[i % 3]
 
         if i in color_positions:
             color = color_positions[i]
@@ -178,6 +189,7 @@ def main():
     sorting_algorithm = bubble_sort
     sorting_algo_name = "Bubble Sort"
     sorting_algorithm_generator = None
+    pygame.mixer.music.load("./sound/water-drop.mp3")
 
     while run:
         clock.tick(60) #sorting speed (incr for faster sorting visualization)
@@ -189,6 +201,7 @@ def main():
                 sorting = False
         else:
             draw(draw_info, sorting_algo_name, ascending)
+            pygame.mixer.music.play(-1)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -223,6 +236,7 @@ def main():
                 sorting_algorithm = selection_sort
                 sorting_algo_name = "Selection Sort"
 
+    pygame.mixer.music.stop()
     pygame.quit()
 
 if __name__ == "__main__":
